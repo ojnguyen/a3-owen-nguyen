@@ -111,15 +111,16 @@ input::placeholder {
   background: var(--blue-dark);
 }
 
-.btn-delete {
+.btn-delete, .btn-edit {
   background: transparent;
   color: var(--delete);
   border: 1px solid var(--delete);
   padding: 0.3rem 0.75rem;
+  margin: 0.25rem;
   font-size: 0.85rem;
 }
 
-.btn-delete:hover {
+.btn-delete:hover, .btn-edit:hover {
   background: var(--delete);
   color: var(--card-bg);
 }

@@ -24,6 +24,9 @@ let liftsCollection;
 const computeORM = function (weight, reps) {
   const unroundedORM = weight * (1 + reps / 30);
   const roundedORM = Math.round(unroundedORM * 100) / 100; // Round to 2 decimal places
+  if (reps === 1) {
+    return weight;
+  }
   return roundedORM;
 };
 
@@ -57,13 +60,28 @@ app.post('/deleteLift', async (req, res) => {
   res.json(liftsQuery); // Sets JSON content-type header and stringifies/sends the lifts array back to client
 })
 
+// Middleware for POST /updateLift
+app.post('/updateLift', async (req, res) => {
+  const data = req.body; // JSON-parsing middleware
+  const updateID = new ObjectId(data.ID);
+  const updatedFields = {
+    exercise: data.exercise,
+    weight: data.weight,
+    reps: data.reps,
+    orm: computeORM(data.weight, data.reps)
+  }
+  await liftsCollection.updateOne({ _id: updateID }, { $set: updatedFields })
+  const liftsQuery = await liftsCollection.find({}).toArray(); // Queries DB for all lifts, converts to array
+  res.json(liftsQuery); // Sets JSON content-type header and stringifies/sends the lifts array back to client
+})
+
 // Function template from MongoDB's Guide
 async function run() {
   // Connect the client to the server	(optional starting in v4.7).
   await client.connect();
   // Send a ping to confirm a successful connection
   await client.db("admin").command({ ping: 1 });
-  console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  console.log("Connected to DB");
 
   liftsCollection = client.db("a3-owen-nguyen").collection("lifts"); // Gets/creates lifts collections in DB
 

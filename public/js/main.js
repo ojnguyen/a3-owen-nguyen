@@ -17,9 +17,10 @@ const renderTable = function (lifts) {
     const tdWeight = document.createElement("td");
     const tdReps = document.createElement("td");
     const tdORM = document.createElement("td");
-    const tdDeleteButton = document.createElement("td");
+    const tdActions = document.createElement("td");
+
     const deleteButton = document.createElement("button"); // Delete button, unique to lift.ID
-    tdDeleteButton.appendChild(deleteButton);
+    const editButton = document.createElement("button"); // Edit button, unique to lift.ID
 
     // Setting textContent to lift's data (and button)
     tdExercise.textContent = lift.exercise;
@@ -28,12 +29,39 @@ const renderTable = function (lifts) {
     tdORM.textContent = lift.orm;
     deleteButton.textContent = "Delete";
     deleteButton.classList.add("btn", "btn-delete"); // Add classes to delete button
+    editButton.textContent = "Edit";
+    editButton.classList.add("btn", "btn-edit"); // Add classes to edit button
 
     // Event listener for delete button
     deleteButton.addEventListener('click', function () { deleteLift(lift._id) });
 
+    editButton.onclick = function () {
+      const exerciseInput = document.createElement("input");
+      exerciseInput.type = "text";
+      exerciseInput.value = lift.exercise;
+
+      const weightInput = document.createElement("input");
+      weightInput.type = "number";
+      weightInput.value = lift.weight;
+
+      const repsInput = document.createElement("input");
+      repsInput.type = "number";
+      repsInput.value = lift.reps;
+
+      tdExercise.replaceChildren(exerciseInput);
+      tdWeight.replaceChildren(weightInput);
+      tdReps.replaceChildren(repsInput);
+
+      editButton.textContent = "Save";
+      editButton.onclick = function () {
+        updateLift(lift._id, exerciseInput.value, Number(weightInput.value), Number(repsInput.value));
+      }
+    };
+
+    tdActions.append(editButton, deleteButton);
+
     // Appends everything to tableRow
-    tableRow.append(tdExercise, tdWeight, tdReps, tdORM, tdDeleteButton);
+    tableRow.append(tdExercise, tdWeight, tdReps, tdORM, tdActions);
 
     // Appends table row to tbody
     tbody.appendChild(tableRow);
@@ -98,6 +126,21 @@ const deleteLift = async function (ID) {
     headers: {
       "Content-Type": "application/json"
     }
+  });
+
+  const lifts = await response.json();
+  renderTable(lifts);
+}
+
+// Function to handle updating a lift by ID
+// Called by an edit button's click handler with that lift's ID and new values
+const updateLift = async function (ID, exercise, weight, reps) {
+  const body = JSON.stringify({ ID, exercise, weight, reps });
+
+  const response = await fetch("/updateLift", {
+    method: "POST",
+    body: body,
+    headers: { "Content-Type": "application/json" }
   });
 
   const lifts = await response.json();
