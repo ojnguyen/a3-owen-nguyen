@@ -28,36 +28,47 @@ const renderTable = function (lifts) {
     tdReps.textContent = lift.reps;
     tdORM.textContent = lift.orm;
     deleteButton.textContent = "Delete";
-    deleteButton.classList.add("btn", "btn-delete"); // Add classes to delete button
+    deleteButton.classList.add("button", "is-danger", "is-small", "is-outlined", "is-inverted", "mx-1"); // Add classes to delete button
     editButton.textContent = "Edit";
-    editButton.classList.add("btn", "btn-edit"); // Add classes to edit button
+    editButton.classList.add("button", "is-danger", "is-small", "is-outlined", "is-inverted", "mx-1"); // Add classes to edit button
 
     // Event listener for delete button
     deleteButton.addEventListener('click', function () { deleteLift(lift._id) });
 
+    // Event listener for edit button for row "lift"
     editButton.onclick = function () {
+      // Exercise -> input field
       const exerciseInput = document.createElement("input");
       exerciseInput.type = "text";
       exerciseInput.value = lift.exercise;
+      exerciseInput.classList.add("input", "is-small");
 
+      // Weight -> input field
       const weightInput = document.createElement("input");
       weightInput.type = "number";
       weightInput.value = lift.weight;
+      weightInput.classList.add("input", "is-small");
 
+      // Reps -> input field
       const repsInput = document.createElement("input");
       repsInput.type = "number";
       repsInput.value = lift.reps;
+      repsInput.classList.add("input", "is-small");
 
+      // Replaces td's text with input fields
       tdExercise.replaceChildren(exerciseInput);
       tdWeight.replaceChildren(weightInput);
       tdReps.replaceChildren(repsInput);
 
-      editButton.textContent = "Save";
+      editButton.textContent = "Save"; // Changes "edit" to "save"
+
+      // Listener for when user clicks "save"
       editButton.onclick = function () {
         updateLift(lift._id, exerciseInput.value, Number(weightInput.value), Number(repsInput.value));
       }
     };
 
+    // Appends edit and delete button to tdActions
     tdActions.append(editButton, deleteButton);
 
     // Appends everything to tableRow
