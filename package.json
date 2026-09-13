@@ -7,9 +7,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "mime": "^2.4.4"
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongodb": "^7.6.0"
   },
   "engines": {
-     "node":"22.x"
+    "node": "22.x"
   }
 }

@@ -30,7 +30,7 @@ const renderTable = function (lifts) {
     deleteButton.classList.add("btn", "btn-delete"); // Add classes to delete button
 
     // Event listener for delete button
-    deleteButton.addEventListener('click', function () { deleteLift(lift.ID) });
+    deleteButton.addEventListener('click', function () { deleteLift(lift._id) });
 
     // Appends everything to tableRow
     tableRow.append(tdExercise, tdWeight, tdReps, tdORM, tdDeleteButton);
