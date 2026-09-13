@@ -1,0 +1,15 @@
+{
+  "name": "a3-owennguyen",
+  "version": "1.0.0",
+  "description": "WPI CS 4241 Assignment 3",
+  "author": "Owen Nguyen",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "mime": "^2.4.4"
+  },
+  "engines": {
+     "node":"22.x"
+  }
+}
