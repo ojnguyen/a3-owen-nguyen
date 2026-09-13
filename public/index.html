@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='en'>
+<html lang='en' data-theme='dark'>
 
 <head>
   <title>CS4241 Assignment 2 - Lift Tracker</title>
@@ -28,8 +28,12 @@
   <section class="section">
     <div class="container">
       <h1 class="title mb-5">Lift Tracker</h1>
+      <p class="subtitle mb-5">
+        Welcome to the Lift Tracker by Owen Nguyen! This application allows you to track your lifts by viewing, adding, removing, and editing them.
+        Additionally, each lift's ORM (one rep max) is calculated to show what the strongest weight you can lift for one repetition of that movement is.
+      </p>
 
-      <div class="columns is-centered is-variable is-6">
+      <div class="columns is-variable is-6">
 
         <!-- SECTION 1: Add a Lift -->
         <div class="column is-narrow">
@@ -38,7 +42,7 @@
             <form id="lift-form">
               <div class="field">
                 <div class="control">
-                  <input class="input" type="text" id="exercise" placeholder="Exercise" required>
+                  <input class="input" type="text" id="exercise" placeholder="Exercise" autocomplete="off" required>
                 </div>
               </div>
               <div class="field">
