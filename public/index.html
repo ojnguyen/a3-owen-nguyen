@@ -2,10 +2,11 @@
 <html lang='en' data-theme='dark'>
 
 <head>
-  <title>CS4241 Assignment 2 - Lift Tracker</title>
+  <title>Lift Tracker - Login</title>
   <meta charset='utf-8' />
-  <script src='js/main.js'></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Learned from the reading, had to add this to make the page responsive -->
+  <script src='js/login.js'></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Learned from the reading, had to add this to make the page responsive -->
 
   <!-- Bulma CSS framework -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
@@ -27,58 +28,22 @@
 <body>
   <section class="section">
     <div class="container">
-      <h1 class="title mb-5">Lift Tracker</h1>
-      <p class="subtitle mb-5">
-        Welcome to the Lift Tracker by Owen Nguyen! This application allows you to track your lifts by viewing, adding, removing, and editing them.
-        Additionally, each lift's ORM (one rep max) is calculated to show what the strongest weight you can lift for one repetition of that movement is.
-      </p>
-
-      <div class="columns is-variable is-6">
-
-        <!-- SECTION 1: Add a Lift -->
-        <div class="column is-narrow">
-          <div class="box">
-            <h2 class="title is-4">Add a Lift</h2>
-            <form id="lift-form">
-              <div class="field">
-                <div class="control">
-                  <input class="input" type="text" id="exercise" placeholder="Exercise" autocomplete="off" required>
-                </div>
-              </div>
-              <div class="field">
-                <div class="control">
-                  <input class="input" type="number" id="weight" placeholder="Weight (lbs)" required>
-                </div>
-              </div>
-              <div class="field">
-                <div class="control">
-                  <input class="input" type="number" id="reps" placeholder="Reps" required>
-                </div>
-              </div>
-              <button type="submit" class="button is-primary">Add Lift</button>
-            </form>
+      <div class="box" style="max-width: 400px; margin: 0 auto;">
+        <h1 class="title is-4">Log In</h1>
+        <p id="login-message" class="help is-danger"></p>
+        <form id="login-form">
+          <div class="field">
+            <div class="control">
+              <input class="input" type="text" id="username" placeholder="Username" required>
+            </div>
           </div>
-        </div>
-
-        <!-- SECTION 2: Your Lifts -->
-        <div class="column is-narrow">
-          <div class="box">
-            <h2 class="title is-4">Your Lifts</h2>
-            <table id="lifts-table" class="table is-fullwidth is-striped is-hoverable">
-              <thead>
-                <tr>
-                  <th>Exercise</th>
-                  <th>Weight</th>
-                  <th>Reps</th>
-                  <th>ORM</th>
-                  <th></th> <!-- Empty column for delete/edit buttons -->
-                </tr>
-              </thead>
-              <tbody id="lifts-body"></tbody> <!-- Table Body; will be replacing every add/delete event. This is where the current state of the server will be displayed always. -->
-            </table>
+          <div class="field">
+            <div class="control">
+              <input class="input" type="password" id="password" placeholder="Password" required>
+            </div>
           </div>
-        </div>
-
+          <button type="submit" class="button is-primary">Log In / Sign Up</button>
+        </form>
       </div>
     </div>
   </section>

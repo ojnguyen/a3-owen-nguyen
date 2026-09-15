@@ -1,4 +1,4 @@
-// FRONT-END (CLIENT) JAVASCRIPT HERE
+// FRONT-END (CLIENT) JAVASCRIPT FOR LIFT TRACKER PAGE
 
 // Function to clear the table and rebuild it from lifts array
 // Called after every load/add/delete (server always sends back full array)
@@ -77,7 +77,7 @@ const renderTable = function (lifts) {
     // Appends table row to tbody
     tbody.appendChild(tableRow);
   }
-} 
+}
 
 // Function to fetch "/lifts", parse JSON response, render table
 // Called on page load
@@ -158,6 +158,18 @@ const updateLift = async function (ID, exercise, weight, reps) {
   renderTable(lifts);
 }
 
+// Function to handle logging out
+// Called by #logout-button click handler
+const logout = async function () {
+  const response = await fetch("/logout", {
+    method: "POST"
+  });
+  const result = await response.json();
+  if (result.success) {
+    window.location.href = "/"; // This redirects user to login page after logging out
+  }
+};
+
 // Function to handle page load events
 // Called when the page loads
 window.onload = function () {
@@ -166,5 +178,9 @@ window.onload = function () {
 
   // Attach addLift as the #lift-form submit handler
   const liftForm = document.getElementById("lift-form");
-  liftForm.addEventListener("submit", addLift);  
+  liftForm.addEventListener("submit", addLift);
+
+  // Attach logout as the #logout-button click handler
+  const logoutButton = document.getElementById("logout-button");
+  logoutButton.addEventListener("click", logout);
 }
