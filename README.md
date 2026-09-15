@@ -92,20 +92,38 @@ Write a paragraph of at least 125 words *for each of the four principles* (four 
 Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
 ---
 
-## Your Web Application Title
+## Lift Tracker
 
-A link to your project running on render.
+https://a3-owen-nguyen.onrender.com/
 
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
+Lift Tracker is a two-tier web application built with a database (MongoDB), Express server, and Bulma CSS template.
+Users can log their gym weightlifting sets (With the lift name, weight in lb/kg, and reps). 
+Users can create an account, and log in. Each user only sees their data. Once logged in, they can add, edit, and delete sets.
+Additionally, each set has a server-calculated ORM, which is the one-rep max of that particular set calculated using the Epley formula. 
 
-- the goal of the application
-- challenges you faced in realizing the application
-- what authentication strategy you chose to use and why (choosing one because it seemed the easiest to implement is perfectly acceptable)
-- what CSS framework you used and why
-  - include any modifications to the CSS framework you made via custom CSS you authored
+### Goal
+The goal of my application is to extend my a2 lift tracker, by replacing the server-side data storage with actual database long-term storage (MongoDB).
+Additionally, the goal is to implement a real backend framework (Express server) along with user authentication.
+
+### Challenges
+The most challenging part for me was determining what middleware I needed (and also the order of it). Additionally, I struggled a little with implementing
+user authentication, and it took me a while to understand how the server, backend, and client communicated regarding cookies and user data (username, hashed passwords).
+
+### Authentication
+I used username + password authentication with express sessions and password hashing via bycryptjs. I originally was planning on not having much complexity
+regarding authentication, but I figured adding it would be a good challenge. Note that new accounts are created on logins where the username doesn't exist in the DB. 
+There is no seperate sign up and log in.
+
+### Framework
+I used the Bulma CSS framework. I found this in the `awesome-css-frameworks` repo, and was drawn to it due to its modern style, and how it is based on flexbox.
+All of my pre-existing CSS could be deleted, and I let Bulma handle the majority of the styling. The only thing I changed was to keep my google font (Lato).
 
 ## Technical Achievements
-- **Tech Achievement 1**: I used OAuth authentication via the GitHub strategy
+- **Tech Achievement 1**: Middleware packages used:
+  - `express-session`: This middleware package manages login sessions. It creates and sends cookies (contains signed session ID), and stores
+  the session data on the server. It also lets routes check if a user is logged in before executing.
+  - `morgan`: This middleware package logs every incoming HTTP request to the console for debugging purposes.
+
 
 ### Design/Evaluation Achievements
 - **Design Achievement 1**: I followed the following tips from the W3C Web Accessibility Initiative...

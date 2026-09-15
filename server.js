@@ -7,10 +7,14 @@ const client = new MongoClient(process.env.MONGODB_URI, {
     deprecationErrors: true,
   }
 });
+const morgan = require('morgan');
 const express = require('express');
 const app = express();
 const session = require('express-session');
 const bcrypt = require('bcryptjs'); // NOTE TO GRADER: Was having trouble with regular bycrypt package, but bycryptjs worked.
+
+// Registers morgan middleware for logging HTTP requests
+app.use(morgan('dev'));
 
 // Registers JSON-parsing middleware
 app.use(express.json());
