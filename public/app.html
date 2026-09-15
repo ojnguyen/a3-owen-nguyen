@@ -62,7 +62,18 @@
                 <div class="field">
                   <label class="label" for="weight">Weight</label>
                   <div class="control">
-                    <input class="input" type="number" id="weight" placeholder="Weight (lbs)" required>
+                    <input class="input" type="number" id="weight" placeholder="Weight" required>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Unit</label>
+                  <div class="control">
+                    <label class="radio">
+                      <input type="radio" name="unit" value="lbs" checked> lbs
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="unit" value="kg"> kg
+                    </label>
                   </div>
                 </div>
                 <div class="field">
@@ -84,7 +95,7 @@
                 <thead>
                   <tr>
                     <th>Exercise</th>
-                    <th>Weight</th>
+                    <th>Weight <span class="has-text-grey">(lbs)</span></th>
                     <th>Reps</th>
                     <th>ORM</th>
                     <th></th> <!-- Empty column for delete/edit buttons -->

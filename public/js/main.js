@@ -99,10 +99,15 @@ const addLift = async function (event) {
   const exerciseInput = document.getElementById("exercise"); // Using .getElementById() here 
   const weightInput = document.querySelector("#weight"); // Using .querySelector() here
   const repsInput = document.querySelector("#reps"); // Using .querySelector() here
+  const unitInput = document.querySelector('input[name="unit"]:checked'); // Using .querySelector() here
 
   // Reading input values (converting string -> number for numeric ones)
   const exercise = exerciseInput.value;
-  const weight = Number(weightInput.value);
+  let weight = Number(weightInput.value);
+  if (unitInput.value === "kg") {
+    // Convert kg to lbs before sending; server stores weight in lbs
+    weight *= 2.20462;
+  }
   const reps = Number(repsInput.value);
 
   const body = JSON.stringify({ exercise, weight, reps });

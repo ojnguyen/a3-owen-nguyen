@@ -33,9 +33,9 @@ const login = async function (event) {
     }
     // Wait 1/2 second so user sees message
     setTimeout(() => {
+      localStorage.setItem("username", username); // Store username in local storage for later use
       window.location.href = "/app.html"; // Redirects user to main page after successful login (after 1/2 second)
       messageElement.textContent = ""; // Clear message after 1/2 second
-      localStorage.setItem("username", username); // Store username in local storage for later use
     }, 500);
   } else {
     messageElement.textContent = "LOGIN FAILED";
