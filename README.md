@@ -94,7 +94,7 @@ Sample Readme (delete the above when you're ready to submit, and modify the belo
 
 ## Lift Tracker
 
-https://a3-owen-nguyen.onrender.com/
+https://a3-owen-nguyen.onrender.com
 
 Lift Tracker is a two-tier web application built with a database (MongoDB), Express server, and Bulma CSS template.
 Users can log their gym weightlifting sets (With the lift name, weight in lb/kg, and reps). 
