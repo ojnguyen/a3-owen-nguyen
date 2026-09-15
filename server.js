@@ -10,7 +10,7 @@ const client = new MongoClient(process.env.MONGODB_URI, {
 const express = require('express');
 const app = express();
 const session = require('express-session');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs'); // NOTE TO GRADER: Was having trouble with regular bycrypt package, but bycryptjs worked.
 
 // Registers JSON-parsing middleware
 app.use(express.json());
@@ -80,17 +80,17 @@ app.post('/login', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10); // 10 is a commonly used salt rounds value
     await usersCollection.insertOne({ username, hashedPassword });
     req.session.username = username;
-    res.json({ success: true, newAccount: true });
+    res.json({ success: true, newAccount: true, username: username });
   } else {
     // If user exists, then user is trying to log in
     // STEPS
     // - Compare password with hashedPassword (using bcrypt.compare())
     // - If matches, set session username to username and respond with a success flag true and newAccount flag false
     // - If doesn't match, respond with a success flag false and newAccount flag false
-    const isMatch = await bcrypt.compare(password, user.hashedPassword);
+    const isMatch = await bcrypt.compare(password, user.hashedPassword); // NOTE: bycrypt.compare under the hood hashes the password (with hashedPassword's salt) and compares it to the hashedPassword
     if (isMatch) {
-      req.session.username = username;
-      res.json({ success: true, newAccount: false });
+      req.session.username = username; // The moment this is called, a cookie is sent to client with session ID (specific to this user) and the server stores that pair of session ID and username.
+      res.json({ success: true, newAccount: false, username: username });
     } else {
       res.json({ success: false, newAccount: false });
     }

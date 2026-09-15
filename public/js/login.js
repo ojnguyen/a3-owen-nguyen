@@ -23,12 +23,20 @@ const login = async function (event) {
   const result = await response.json();
 
   if (result.success) {
+    const username = result.username; // For display
     if (result.newAccount) {
       messageElement.textContent = "CREATED NEW ACCOUNT, LOGGED IN SUCCESSFULLY";
+      messageElement.style.color = "green";
     } else {
       messageElement.textContent = "LOGGED IN SUCCESSFULLY";
+      messageElement.style.color = "green";
     }
-    window.location.href = "/app.html"; // Redirects user to main page after successful login
+    // Wait 1/2 second so user sees message
+    setTimeout(() => {
+      window.location.href = "/app.html"; // Redirects user to main page after successful login (after 1/2 second)
+      messageElement.textContent = ""; // Clear message after 1/2 second
+      localStorage.setItem("username", username); // Store username in local storage for later use
+    }, 500);
   } else {
     messageElement.textContent = "LOGIN FAILED";
   }

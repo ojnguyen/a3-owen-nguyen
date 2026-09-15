@@ -183,4 +183,9 @@ window.onload = function () {
   // Attach logout as the #logout-button click handler
   const logoutButton = document.getElementById("logout-button");
   logoutButton.addEventListener("click", logout);
+
+  // Display the username of the logged-in user
+  const usernameDisplay = document.getElementById("username-display");
+  const username = localStorage.getItem("username");
+  usernameDisplay.textContent = username;
 }
